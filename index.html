@@ -14,11 +14,38 @@
       color: white;
       text-align: center;
       padding: 20px 0;
-      box-shadow: 10px 10px 5px rgba(0,0,0 .7);
     }
     .form-header img {
       max-width: 100px;
       margin-bottom: 10px;
+    }
+    .card {
+      margin-bottom: 10%;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    }
+    .mb-3 {
+      margin-top: 2%;
+      position: relative;
+    }
+    .mb-3 label {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #777;
+      font-size: 14px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .mb-3 input {
+      padding-left: 10px;
+    }
+    .mb-3 input:focus {
+      padding-left: 10px;
+    }
+    .mb-3 input:focus + label,
+    .mb-3 input:not(:placeholder-shown) + label {
+      transform: translateY(-200%) translateX(0);
+      color: #FF8C00;
     }
   </style>
 </head>
@@ -27,24 +54,24 @@
     <div class="card p-4">
       <div class="form-header">
         <img src="https://cloud.bry.com.br/cloud-static/images/logo.png" alt="Logo">
-        <h2>Tirar Foto da Câmera</h2>
+        <h2>Assinatura eletrônica</h2>
       </div>
       <form id="formulario">
         <div class="mb-3">
-          <label for="nome" class="form-label">Nome:</label>
-          <input type="text" class="form-control" id="nome" name="nome" required>
+          <input type="text" class="form-control" id="nome" name="nome" required placeholder=" ">
+          <label for="nome" class="form-label">Nome</label>
         </div>
         <div class="mb-3">
-          <label for="email" class="form-label">E-mail:</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+          <input type="email" class="form-control" id="email" name="email" required placeholder=" ">
+          <label for="email" class="form-label">E-mail</label>
         </div>
         <div class="mb-3">
-          <label for="cpf" class="form-label">CPF:</label>
-          <input type="text" class="form-control" id="cpf" name="cpf" required>
+          <input type="text" class="form-control" id="cpf" name="cpf" required placeholder=" ">
+          <label for="cpf" class="form-label">CPF</label>
         </div>
         <div class="mb-3">
-          <label for="foto" class="form-label">Foto:</label>
           <input type="file" class="form-control" id="foto" name="foto" accept="image/*" capture="camera">
+          <label for="foto" class="form-label">Foto</label>
         </div>
         <button type="submit" class="btn btn-primary">Enviar Dados</button>
       </form>
