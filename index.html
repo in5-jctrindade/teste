@@ -163,20 +163,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
     });
 //funçao para obter estado brasileiro
-function obterEstadoBrasileiro() {
-    return new Promise((resolve, reject) => {
-        fetch('http://ip-api.com/json')
-            .then(response => response.json())
-            .then(data => {
-                const estado = data.region; // O estado brasileiro estará em "regionName"
-                uf = estado;
-                resolve(estado);
-            })
-            .catch(error => {
-                reject(error);
-            });
-    });
-}
+// function obterEstadoBrasileiro() {
+//     return new Promise((resolve, reject) => {
+//         fetch('http://ip-api.com/json')
+//             .then(response => response.json())
+//             .then(data => {
+//                 const estado = data.region; // O estado brasileiro estará em "regionName"
+//                 uf = estado;
+//                 resolve(estado);
+//             })
+//             .catch(error => {
+//                 reject(error);
+//             });
+//     });
+// }
 //Obtem o estado do pc e ja chama api de feriados
 //  obterEstadoBrasileiro()
 //     .then(estado => {
