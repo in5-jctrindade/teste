@@ -178,14 +178,14 @@ function obterEstadoBrasileiro() {
     });
 }
 //Obtem o estado do pc e ja chama api de feriados
- obterEstadoBrasileiro()
-    .then(estado => {
-    console.log("Estado brasileiro: " + estado);
+//  obterEstadoBrasileiro()
+//     .then(estado => {
+  //  console.log("Estado brasileiro: " + estado);
     const data = new Date();
     const ano = data.getFullYear();
     console.log(ano); // Isso imprimirá o ano atual
     // API que retorna feriados nacionais e do estado de SP
-    fetch("https://api.invertexto.com/v1/holidays/"+ano+"?token=4548|d1SywAoRWylraVHZNGBgshLTqrTvu89Z&state="+estado)
+    fetch("https://api.invertexto.com/v1/holidays/"+ano+"?token=4548|d1SywAoRWylraVHZNGBgshLTqrTvu89Z&state="+"SP")
         .then(response => response.json())
         .then(data => {
             // Iterar sobre os eventos da API e adicioná-los ao calendário
@@ -202,10 +202,10 @@ function obterEstadoBrasileiro() {
         .catch(error => {
             console.error('Erro ao buscar eventos da API:', error);
         });
-    })
-    .catch(error => {
-        console.error('Erro ao buscar informações de localização: ', error);
-    });
+    // })
+    // .catch(error => {
+    //     console.error('Erro ao buscar informações de localização: ', error);
+    // });
 });
     </script>
     <!-- Modal para exibir informações do evento -->
