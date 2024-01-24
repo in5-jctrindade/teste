@@ -1,245 +1,44 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário com Eventos</title>
-    <!-- Inclua os estilos CSS do Bootstrap 5 (opcional) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Inclua os estilos CSS do FullCalendar -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.css" rel="stylesheet">
-    <style>
-      body {
-    background-color: #ddd;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.container {
-    max-height: 100vh;
-    overflow-y: hidden;
-    width: 100%;
-}
-
-header {
-    background-color: #273746;
-    text-align: center;
-    padding: 3px;
-}
-
-header img {
-    max-width: 100px;
-    height: auto;
-    filter: brightness(100);
-}
-
-.card {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 0;
-}
-
-.calendar-container {
-    background-color: #fff;
-}
-
-.fc-toolbar {
-    justify-content: center;
-}
-
-.fc-day-header {
-    background-color: #273746;
-    color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1px;
-}
-
-.fc-daygrid-day-number {
-    color: #273746;
-    font-weight: bold;
-    font-size: 16px;
-    text-decoration: none;
-    text-align: center;
-    padding: 2px;
-}
-
-tr {
-    padding: 0;
-    height: 5px;
-}
-
-.fc-col-header-cell-cushion {
-    text-decoration: none;
-    font-size: 16px;
-    color: #273746;
-}
-
-.fc-toolbar-title {
-    color: #273746;
-}
-
-#calendar {
-    text-transform: capitalize;
-}
-
-/* Media queries para tamanhos de tela diferentes */
-
-/* Estilos para tablet */
-@media (max-width: 768px) {
-    header img {
-        max-width: 80px;
-    }
-    .fc-daygrid-day-number {
-        font-size: 14px;
-    }
-    .fc-toolbar-title {
-        font-size: 18px;
-    }
-}
-
-/* Estilos para celular */
-@media (max-width: 480px) {
-    header img {
-        max-width: 60px;
-    }
-    .fc-daygrid-day-number {
-        font-size: 12px;
-    }
-    .fc-toolbar-title {
-        font-size: 13px !important;
-    }
-    .fc-button{
-        margin-bottom: 5px !important;
-        margin-left: 0px !important;
-        padding: 0 !important;
-        font-size: 13px !important;
-    }
-    .fc-col-header-cell-cushion{
-        font-size: 13px !important;
-    }
-    .container{
-        padding: 0 !important;
-        height: 120vh;
-    }
- 
-}
-
-    </style>
+l="stylesheet" href="style.css">
+    <title>JS Game</title>
 </head>
+
 <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <header>
-                    <img src="https://bpm-dev.gasmig.com.br/bpm/upload/cadastros/gasmig.png" alt="Logo" id="logo" />
-                </header>
-                <div class="card">
-                    <div class="card-body">
-                        <div id="calendar-container" class="calendar-container">
-                            <div id="calendar" class="calendar container"></div>
-                        </div>
-                    </div>
+        <div class="container__conteudo">
+            <img src="./img/robot.png" alt="robô mergulhador" class="container__imagem-robo" />
+            <div class="container__informacoes">
+                <img src="./img/trophy.png" alt="ícone de um troféu" />
+                 <div class="container__texto">
+                    <h1>Você <span id= "resultado" class="container__texto-azul">acertou!</span></h1>
+                    <h2 id="titulo"> Você descobriu o número secreto!</h2>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Inclua as bibliotecas JavaScript do jQuery, Bootstrap e FullCalendar -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js"></script>
-    <!-- Inclua o arquivo de idioma em português -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales/pt-br.js"></script>
-    <!-- Inclua seu arquivo JavaScript personalizado -->
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const calendarioEl = document.getElementById('calendar');
-    // Inicializar o calendário com uma visualização vazia
-    const calendar = new FullCalendar.Calendar(calendarioEl, {
-        initialView: 'dayGridMonth',
-        height: 500, // Altura do calendário
-        locale: 'pt-br', // Define o idioma para o português (brasileiro)
-        events: [],
-        eventClick: function (info) {
-                    // Quando um evento é clicado, exiba as informações em um modal
-                    var modal = new bootstrap.Modal(document.getElementById('eventModal'));
-                    var modalBody = document.getElementById('eventModalBody');
-                    modalBody.innerHTML = '<h5>' + info.event.title + '</h5>';
-                    modal.show();
-                }
-    });
-//funçao para obter estado brasileiro
-// function obterEstadoBrasileiro() {
-//     return new Promise((resolve, reject) => {
-//         fetch('http://ip-api.com/json')
-//             .then(response => response.json())
-//             .then(data => {
-//                 const estado = data.region; // O estado brasileiro estará em "regionName"
-//                 uf = estado;
-//                 resolve(estado);
-//             })
-//             .catch(error => {
-//                 reject(error);
-//             });
-//     });
-// }
-//Obtem o estado do pc e ja chama api de feriados
-//  obterEstadoBrasileiro()
-//     .then(estado => {
-  //  console.log("Estado brasileiro: " + estado);
+    <script >
+        alert ('Boas vindas ao jogo do Bisma');
+let numeroSecreto = 5;
+let titulo =document.getElementById('titulo') ;
+let resultado=document.getElementById('resultado') ;
+let img=document.querySelector('.container__imagem-robo') ;
 
-    const data = new Date();
-    const ano = data.getFullYear();
-    console.log(ano); // Isso imprimirá o ano atual
-    // API que retorna feriados nacionais e do estado de SP
-    fetch("https://api.invertexto.com/v1/holidays/"+ano+"?token=4548|d1SywAoRWylraVHZNGBgshLTqrTvu89Z&state="+"SP")
-        .then(response => response.json())
-        .then(data => {
-            // Iterar sobre os eventos da API e adicioná-los ao calendário
-            data.forEach(evento => {
-                calendar.addEvent({
-                    title: evento.name,
-                    start: evento.date,
-                    end: evento.date
-                    // Adicione aqui outras personalizações ou propriedades do evento, se necessário
-                });
-            });
-            calendar.render();
-        })
-        .catch(error => {
-            console.error('Erro ao buscar eventos da API:', error);
-        });
-    // })
-    // .catch(error => {
-    //     console.error('Erro ao buscar informações de localização: ', error);
-    // });
-});
+console.log(numeroSecreto)
+let chute = prompt('Escolha um numero entre 1 e 10');
+
+// se chute for igual ao numero secreto
+if (chute == numeroSecreto){
+    titulo.textContent="voce acertou"
+    resultado.textContent="voce acertou"
+    img.setAttribute('src',"https://i.makeagif.com/media/3-21-2021/ncFCLo.gif");
+    alert(`Isso ai! Voce descobriu o numero secreto ${numeroSecreto}`);
+} else {
+    titulo.textContent="voce errou"
+    resultado.textContent="voce errou"
+    img.setAttribute('src',"https://media3.giphy.com/media/3XuEQA6Ygv0StEzuRg/giphy.gif");
+
+    alert('Você errou :( ')
+}
     </script>
-    <!-- Modal para exibir informações do evento -->
-    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <header>
-                    <img src="https://bpm-dev.gasmig.com.br/bpm/upload/cadastros/gasmig.png" alt="Logo" id="logo" />
-                </header>
-                <div class="modal-header">
-                    <h5 class="modal-title" id="eventModalLabel">Detalhes do Evento</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="eventModalBody">
-                    <!-- Aqui as informações do evento serão exibidas -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Inclua as bibliotecas JavaScript do Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>
